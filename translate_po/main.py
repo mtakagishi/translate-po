@@ -53,6 +53,7 @@ def run(**kwargs):
 
     if os.path.isfile(arguments.src):
         if recognize_po_file(arguments.src):
+            found_files = True
             solve(arguments.dest, arguments.src, arguments)
     else:
         found_files = False
