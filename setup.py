@@ -12,7 +12,8 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/zcribe/translate-po",
-    packages=setuptools.find_packages(exclude=['docs', 'tests', 'translated', 'untranslated']),
+    packages=setuptools.find_packages(
+        exclude=['docs', 'tests', 'translated', 'untranslated']),
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Programming Language :: Python :: 3",
@@ -35,10 +36,10 @@ setuptools.setup(
     },
     install_requires=[
         'polib>=1.1.0',
-        'googletrans>=3.0.0'
+        'googletrans==4.0.0-rc1'
     ],
     setup_requires=[
         'polib>=1.1.0',
-        'googletrans>=3.0.0'
+        'googletrans==4.0.0-rc1'
     ],
 )
