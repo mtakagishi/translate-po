@@ -64,7 +64,7 @@ def run(**kwargs):
 
     if not found_files:
         # raise Exception(f"Couldn't find any .po files at: '{arguments.src}'")
-        pring(f"Couldn't find any .po files at: '{arguments.src}'")
+        print(f"Couldn't find any .po files at: '{arguments.src}'")
         pass
 
 
