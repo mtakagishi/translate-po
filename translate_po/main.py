@@ -24,7 +24,8 @@ def solve(new_file: str, old_file: str, arguments):
     """ Translates single file. """
     lines = read_lines(old_file)
     for line in lines:
-        line.msgstr = polib.unescape(translate(polib.escape(line.msgid), arguments))
+        line.msgstr = polib.unescape(
+            translate(polib.escape(line.msgid), arguments))
         print(f"Translated {lines.percent_translated()}% of the lines.")
     save_lines(new_file, lines)
 
@@ -38,7 +39,8 @@ def run(**kwargs):
      """
     found_files = False
 
-    parser = argparse.ArgumentParser(description='Automatically translate PO files using Google translate.')
+    parser = argparse.ArgumentParser(
+        description='Automatically translate PO files using Google translate.')
     parser.add_argument('--fro', type=str, help='Source language you want to translate from to (Default: en)',
                         default=kwargs.get('fro', LANGUAGE_SOURCE))
     parser.add_argument('--to', type=str, help='Destination language you want to translate to (Default: et)',
@@ -49,13 +51,21 @@ def run(**kwargs):
                         default=kwargs.get('dest', TRANSLATED_PATH))
     arguments = parser.parse_args()
 
-    for file in os.listdir(arguments.src):
-        if recognize_po_file(file):
-            found_files = True
-            solve(os.path.join(arguments.dest, file), os.path.join(arguments.src, file), arguments)
+    if os.path.isfile(arguments.src):
+        if recognize_po_file(arguments.src):
+            solve(arguments.dest, arguments.src, arguments)
+    else:
+        found_files = False
+        for file in os.listdir(arguments.src):
+            if recognize_po_file(file):
+                found_files = True
+                solve(os.path.join(arguments.dest, file),
+                      os.path.join(arguments.src, file), arguments)
 
     if not found_files:
-        raise Exception(f"Couldn't find any .po files at: '{arguments.src}'")
+        # raise Exception(f"Couldn't find any .po files at: '{arguments.src}'")
+        pring(f"Couldn't find any .po files at: '{arguments.src}'")
+        pass
 
 
 if __name__ == '__main__':
