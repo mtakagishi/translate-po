@@ -10,9 +10,6 @@ from .utilities.match import recognize_po_file
 
 
 def translate(source: str, arguments) -> str:
-    # DEBUG
-    print(f"{source=}")
-    print(f"{arguments=}")
     """ Translates a single string into target language. """
     translator = Translator()
     return translator.translate(source, dest=arguments.to, src=arguments.fro).text
@@ -34,9 +31,6 @@ def solve(new_file: str, old_file: str, arguments):
 
 
 def run(**kwargs):
-    # debug
-    import pprint
-    pprint.pprint(kwargs)
     """ Core process that translates all files in a directory.
      :parameter fro:
      :parameter to:
@@ -55,9 +49,9 @@ def run(**kwargs):
                         default=kwargs.get('src', UNTRANSLATED_PATH))
     parser.add_argument('--dest', type=str, help='Destination directory you want to translated files to end up in',
                         default=kwargs.get('dest', TRANSLATED_PATH))
-    print("1")
-    arguments = parser.parse_args()
-    print("2")
+
+    # arguments = parser.parse_args()
+    arguments = parser.parse_args([])
 
     if os.path.isfile(arguments.src):
         if recognize_po_file(arguments.src):
