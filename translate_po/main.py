@@ -10,9 +10,6 @@ from .utilities.match import recognize_po_file
 
 
 async def translate(source: str, arguments) -> str:
-    # DEBUG
-    print(f"{source=}")
-    print(f"{arguments=}")
     """ Translates a single string into target language. """
     translator = Translator()
     result = await translator.translate(source, dest=arguments.to, src=arguments.fro)
@@ -53,7 +50,6 @@ async def run(**kwargs):
     parser.add_argument('--dest', type=str, help='Destination directory you want to translated files to end up in',
                         default=kwargs.get('dest', TRANSLATED_PATH))
 
-    # arguments = parser.parse_args()
     arguments = parser.parse_args([])
 
     if os.path.isfile(arguments.src):
