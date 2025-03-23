@@ -34,6 +34,9 @@ def solve(new_file: str, old_file: str, arguments):
 
 
 def run(**kwargs):
+    # debug
+    import pprint
+    pprint.pprint(kwargs)
     """ Core process that translates all files in a directory.
      :parameter fro:
      :parameter to:
