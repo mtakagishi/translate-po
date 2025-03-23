@@ -9,31 +9,31 @@ from .utilities.io import read_lines, save_lines
 from .utilities.match import recognize_po_file
 
 
-def translate(source: str, arguments) -> str:
+async def translate(source: str, arguments) -> str:
     # DEBUG
     print(f"{source=}")
     print(f"{arguments=}")
     """ Translates a single string into target language. """
     translator = Translator()
-    return translator.translate(source, dest=arguments.to, src=arguments.fro).text
-
+    result = await translator.translate(source, dest=arguments.to, src=arguments.fro)
+    return result.text
 
 def create_close_string(line: str) -> str:
     """ Creates single .po file translation target sting. """
     return r"msgstr " + '"' + line + '"' + "\n"
 
 
-def solve(new_file: str, old_file: str, arguments):
+async def solve(new_file: str, old_file: str, arguments):
     """ Translates single file. """
     lines = read_lines(old_file)
     for line in lines:
         line.msgstr = polib.unescape(
-            translate(polib.escape(line.msgid), arguments))
+            await translate(polib.escape(line.msgid), arguments))
         print(f"Translated {lines.percent_translated()}% of the lines.")
     save_lines(new_file, lines)
 
 
-def run(**kwargs):
+async def run(**kwargs):
     """ Core process that translates all files in a directory.
      :parameter fro:
      :parameter to:
@@ -59,13 +59,13 @@ def run(**kwargs):
     if os.path.isfile(arguments.src):
         if recognize_po_file(arguments.src):
             found_files = True
-            solve(arguments.dest, arguments.src, arguments)
+            await solve(arguments.dest, arguments.src, arguments)
     else:
         found_files = False
         for file in os.listdir(arguments.src):
             if recognize_po_file(file):
                 found_files = True
-                solve(os.path.join(arguments.dest, file),
+                await solve(os.path.join(arguments.dest, file),
                       os.path.join(arguments.src, file), arguments)
 
     if not found_files:
