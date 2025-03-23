@@ -55,7 +55,9 @@ def run(**kwargs):
                         default=kwargs.get('src', UNTRANSLATED_PATH))
     parser.add_argument('--dest', type=str, help='Destination directory you want to translated files to end up in',
                         default=kwargs.get('dest', TRANSLATED_PATH))
+    pring("1")
     arguments = parser.parse_args()
+    pring("2")
 
     if os.path.isfile(arguments.src):
         if recognize_po_file(arguments.src):
