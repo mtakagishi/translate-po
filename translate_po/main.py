@@ -41,9 +41,9 @@ async def run(**kwargs):
 
     parser = argparse.ArgumentParser(
         description='Automatically translate PO files using Google translate.')
-    parser.add_argument('--fro', type=str, help='Source language you want to translate from to (Default: en)',
+    parser.add_argument('--fro', type=str, help='Source language you want to translate from to (Default: ja)',
                         default=kwargs.get('fro', LANGUAGE_SOURCE))
-    parser.add_argument('--to', type=str, help='Destination language you want to translate to (Default: et)',
+    parser.add_argument('--to', type=str, help='Destination language you want to translate to (Default: en)',
                         default=kwargs.get('to', LANGUAGE_DESTINATION))
     parser.add_argument('--src', type=str, help='Source directory or the files you want to translate',
                         default=kwargs.get('src', UNTRANSLATED_PATH))

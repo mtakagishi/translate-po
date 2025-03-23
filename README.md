@@ -19,8 +19,9 @@ pip install git+https://github.com/mtakagishi/translate-po.git
 Usage
 ```python
 from translate_po.main import run
+import asyncio
 
-run(fro="en" to="et" src="./untranslated" dest="./translated")
+asyncio.run(run(fro="ja" to="en" src="./untranslated" dest="./translated"))
 ```
 
 ### Changelog
