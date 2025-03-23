@@ -10,6 +10,9 @@ from .utilities.match import recognize_po_file
 
 
 def translate(source: str, arguments) -> str:
+    # DEBUG
+    print(f"{source=}")
+    print(f"{arguments=}")
     """ Translates a single string into target language. """
     translator = Translator()
     return translator.translate(source, dest=arguments.to, src=arguments.fro).text
