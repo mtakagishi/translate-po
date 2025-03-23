@@ -27,7 +27,7 @@ run(fro="en" to="et" src="./untranslated" dest="./translated")
 1.0.13-post1 - 2025-03-23
 - Migrated `googletrans` to version 4.0.2 to avoid deprecated `cgi` usage
 - Rewrote translation logic to use `async/await`
-- Made the entire tool compatible with **Python 3.13**
+- Made the entire tool compatible with Python 3.13
 - Updated `README.md` to reflect fork and new usage
 
 1.0.13
